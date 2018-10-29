@@ -46,8 +46,9 @@ class PostsController extends Controller
         $post->body = $request->input('body');
         $post->user_id = auth()->user()->id;
         $post->save();
-
-        return redirect('/posts')->with ('success', 'Post Created');
+        
+        notify()->flash('You have created a post', 'success');
+        return redirect('/posts');
     }
 
     /**
@@ -92,8 +93,9 @@ class PostsController extends Controller
       $post->title = $request->input('title');
       $post->body = $request->input('body');
       $post->save();
-
-      return redirect('/posts')->with ('success', 'Post Updated');
+    
+      notify()->flash('You have updtaed a post', 'success');
+      return redirect('/posts');
     }
 
     /**
@@ -107,6 +109,7 @@ class PostsController extends Controller
         $post = Post::find($id);
         $post->delete();
 
-        return redirect('/posts')->with ('success', 'Post Removed');
+        notify()->flash('You have deleted a post', 'success');
+        return redirect('/posts');
     }
 }

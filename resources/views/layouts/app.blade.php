@@ -22,8 +22,9 @@
 <body>
         @include('inc.navbar')
           <div class="container">
+          
           <main class="py-4">
-            @include('inc.messages')
+          @include('inc.messages')
             @yield('content')
           </main>
         </div>
@@ -31,5 +32,16 @@
     <script>
         CKEDITOR.replace( 'article-ckeditor' );
     </script>    
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script>
+        
+        @if (notify()->ready())
+            swal({
+                title: "{{ notify()->message() }}",
+                icon: "{{ notify()->icon() }}",
+            })    
+        @endif
+        
+    </script>
 </body>
 </html>
